@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Spoon"
+        android:textColor="@color/foreground"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.jerryio.spoon.android.views.InstantAutoComplete
+        android:id="@+id/inputAddress"
+        style="@style/Spoon.StandardInputStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="10dp"
+        android:hint="IP Address"
+        android:inputType="textNoSuggestions|text"
+        android:text="192.168.0.2"
+        app:layout_constraintEnd_toStartOf="@+id/btnSelectAddress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnSelectAddress"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/btnBackground"
+        android:backgroundTintMode="src_in"
+        android:fontFamily="sans-serif"
+        android:onClick="onSelectAddress"
+        android:text="Select"
+        app:layout_constraintBottom_toBottomOf="@+id/inputAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/inputAddress" />
+
+    <Switch
+        android:id="@+id/switchMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="6dp"
+        android:checked="true"
+        android:onClick="onModeSwitch"
+        android:text="Loading Loading"
+        android:textColor="@color/foreground"
+        android:textColorHint="@color/checkkboxSelected"
+        android:textColorLink="@color/checkkboxBorder"
+        android:textOff="Server"
+        android:textOn="Client"
+        android:thumbTint="#673AB7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="@color/btnBackground"
+        android:fontFamily="sans-serif"
+        android:onClick="onExecuteAction"
+        android:text="Loading Loading"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputAddress" />
+
+    <EditText
+        android:id="@+id/inputMessage"
+        style="@style/Spoon.StandardInputStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="4dp"
+        android:ems="10"
+        android:inputType="textLongMessage|textMultiLine|text"
+        android:maxHeight="150dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/btnSend"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/btnBackground"
+        android:fontFamily="sans-serif"
+        android:onClick="onSend"
+        android:text="Send"
+        android:textAllCaps="true"
+        app:layout_constraintBottom_toBottomOf="@+id/inputMessage"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutServerControl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputAddress"
+        tools:visibility="visible">
+
+        <Button
+            android:id="@+id/btnAcceptConn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:backgroundTint="@color/btnBackground"
+            android:fontFamily="sans-serif"
+            android:onClick="onAllowConnect"
+            android:text="Accept Conn"
+            android:textAllCaps="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnKickClients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:backgroundTint="@color/btnBackground"
+            android:fontFamily="sans-serif"
+            android:onClick="onKickClient"
+            android:text="Kick 0 Client"
+            android:textAllCaps="false"
+            app:layout_constraintStart_toEndOf="@+id/btnAcceptConn"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutClientControl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@+id/inputAddress"
+        tools:layout_editor_absoluteX="170dp">
+
+        <EditText
+            android:id="@+id/inputChannel"
+            style="@style/Spoon.StandardInputStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:ems="10"
+            android:hint="Channel"
+            android:inputType="textNoSuggestions|text"
+            app:layout_constraintEnd_toStartOf="@+id/btnRandomChannel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btnRandomChannel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:background="@color/background"
+            android:contentDescription="get random channel"
+            android:onClick="onRandomChannel"
+            app:layout_constraintBottom_toBottomOf="@+id/inputChannel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/inputChannel"
+            app:srcCompat="@android:drawable/ic_popup_sync" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <CheckBox
+        android:id="@+id/chbSpaces"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:buttonTint="@color/checkkboxBorder"
+        android:checked="true"
+        android:onClick="onTrimSpace"
+        android:text="Trim spaces"
+        android:textColor="@color/foreground"
+        android:textColorHighlight="@color/checkkboxSelected"
+        android:textColorHint="@color/checkkboxBackground"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:scrollbarSize="0dp"
+        android:scrollbars="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/inputMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/btnBackground"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="onInsertSymbol"
+                android:paddingStart="0dp"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text=" "
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:iconPadding="0dp" />
+
+            <Button
+                android:id="@+id/button7"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/btnBackground"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="onInsertSymbol"
+                android:paddingStart="0dp"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="，"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:iconPadding="0dp" />
+
+            <Button
+                android:id="@+id/button8"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/btnBackground"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="onInsertSymbol"
+                android:paddingStart="0dp"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="。"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:iconPadding="0dp" />
+
+            <Button
+                android:id="@+id/button9"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/btnBackground"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="onInsertSymbol"
+                android:paddingStart="0dp"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="、"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:iconPadding="0dp" />
+
+            <Button
+                android:id="@+id/button10"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/btnBackground"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="onInsertSymbol"
+                android:paddingStart="0dp"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="："
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:iconPadding="0dp" />
+
+            <Button
+                android:id="@+id/button11"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/btnBackground"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="onInsertSymbol"
+                android:paddingStart="0dp"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="；"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:iconPadding="0dp" />
+
+            <Button
+                android:id="@+id/button12"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/btnBackground"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="onInsertSymbol"
+                android:paddingStart="0dp"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="？"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:iconPadding="0dp" />
+
+            <Button
+                android:id="@+id/button13"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/btnBackground"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="onInsertSymbol"
+                android:paddingStart="0dp"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="！"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:iconPadding="0dp" />
+
+            <Button
+                android:id="@+id/button14"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/btnBackground"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="onInsertSymbol"
+                android:paddingStart="0dp"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="「"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:iconPadding="0dp" />
+
+            <Button
+                android:id="@+id/button15"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/btnBackground"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="onInsertSymbol"
+                android:paddingStart="0dp"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="」"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:iconPadding="0dp" />
+
+            <Button
+                android:id="@+id/button16"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/btnBackground"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="onInsertSymbol"
+                android:paddingStart="0dp"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="（"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:iconPadding="0dp" />
+
+            <Button
+                android:id="@+id/button17"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/btnBackground"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="onInsertSymbol"
+                android:paddingStart="0dp"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="）"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:iconPadding="0dp" />
+
+            <Button
+                android:id="@+id/button18"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/btnBackground"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="onInsertSymbol"
+                android:paddingStart="0dp"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="｛"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:iconPadding="0dp" />
+
+            <Button
+                android:id="@+id/button19"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/btnBackground"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="onInsertSymbol"
+                android:paddingStart="0dp"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="｝"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:iconPadding="0dp" />
+
+            <Button
+                android:id="@+id/button20"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/btnBackground"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:onClick="onInsertSymbol"
+                android:paddingStart="0dp"
+                android:paddingLeft="0dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp"
+                android:paddingBottom="0dp"
+                android:text="　"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                app:iconPadding="0dp" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.65" />
+
+    <LinearLayout
+        android:id="@+id/layoutSecurityPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="80dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10sp"
+            android:gravity="center"
+            android:text="Security Code:"
+            android:textAlignment="center"
+            android:textColor="@color/infoForeground" />
+
+        <TextView
+            android:id="@+id/tvSecurityCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="\n"
+            android:textAlignment="center"
+            android:textColor="@color/infoForeground"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:typeface="monospace" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

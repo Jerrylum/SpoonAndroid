@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="background">#2C2C3B</color>
+    <color name="foreground">#D0D0D9</color>
+    <color name="btnBackground">#45405C</color>
+    <color name="btnPressedBackground">#675F89</color>
+    <color name="textfieldBackground">#3A384D</color>
+    <color name="checkkboxBackground">#343445</color>
+    <color name="checkkboxBorder">#756b8c</color>
+    <color name="checkkboxSelected">#a4a1b3</color>
+    <color name="borderColor">#4E4C63</color>
+    <color name="focusColor">#693687</color>
+    <color name="focusedBorderColor">#814F9E</color>
+    <color name="infoForeground">#6d6a80</color>
+    <color name="errorForeground">#dd3962</color>
+</resources>

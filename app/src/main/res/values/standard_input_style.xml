@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Spoon.StandardInputStyle" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:backgroundTint">@color/selector_editview</item>
+        <item name="android:textColor">@color/foreground</item>
+        <item name="android:textColorHint">@color/infoForeground</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+</resources>
