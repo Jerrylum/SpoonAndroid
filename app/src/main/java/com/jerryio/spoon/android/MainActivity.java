@@ -264,15 +264,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setInputText(String msg) {
-        inputMessage.setText(msg);
+        handler.post(() -> {
+            inputMessage.setText(msg);
+        });
     }
 
     public void setInputAddress(String ip) {
-        inputAddress.setText(ip);
+        handler.post(() -> {
+            inputAddress.setText(ip);
+        });
     }
 
     public void setInputChannel(String channel) {
-        inputChannel.setText(channel);
+        handler.post(() -> {
+            inputChannel.setText(channel);
+        });
     }
 
     public SharedPreferences getConfig() {
