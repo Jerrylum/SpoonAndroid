@@ -291,7 +291,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showToast(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+        handler.post(() -> {
+            Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+        });
     }
 
     private void doSendUserInput() {

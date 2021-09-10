@@ -327,6 +327,7 @@ public class SpoonAndroid {
                     activity.showToast("Watchdog closed connection");
                     desktop.client.getConnection().close();
                 } catch (Exception e) {
+                    e.printStackTrace();
                     activity.showToast("Watchdog closed connection (error)");
                 } finally {
                     desktop.client = null;
