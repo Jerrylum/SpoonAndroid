@@ -1,5 +1,12 @@
 package com.jerryio.spoon.android.utils;
 
+import android.os.AsyncTask;
+
+import com.jerryio.spoon.android.MainActivity;
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -43,5 +50,26 @@ public class Util {
         }
 
         return builder.toString();
+    }
+
+    public static String getMyIP() {
+        Socket socket = new Socket();
+        try {
+            socket.connect(new InetSocketAddress("google.com", 80));
+            String rtn = socket.getLocalAddress().getHostAddress();
+            socket.close();
+            return rtn;
+        } catch (IOException e) {
+            return "(error)";
+        }
+    }
+
+    public static class UpdateServerIPTask extends AsyncTask<Void, Void, Void> {
+
+        protected Void doInBackground(Void... data) {
+            MainActivity.getInstance().setServerIpTextView(getMyIP());
+            return null;
+        }
+
     }
 }

@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText inputMessage;
     private Switch switchMode;
     private Button btnAction;
+    private TextView tvServerIP;
     private ConstraintLayout layoutServerControl;
     private ConstraintLayout layoutClientControl;
     private Button btnAcceptConn;
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         inputMessage = findViewById(R.id.inputMessage);
         switchMode = findViewById(R.id.switchMode);
         btnAction = findViewById(R.id.btnAction);
+        tvServerIP = findViewById(R.id.tvServerIP);
         layoutServerControl = findViewById(R.id.layoutServerControl);
         layoutClientControl = findViewById(R.id.layoutClientControl);
         btnAcceptConn = findViewById(R.id.btnAcceptConn);
@@ -116,6 +118,11 @@ public class MainActivity extends AppCompatActivity {
     private void doUpdateInterface() {
         SpoonAndroid desktop = SpoonAndroid.getInstance();
         boolean isClient = desktop.getMode() == ConnectionMode.CLIENT;
+
+        if (isClient)
+            setServerIpTextView("");
+        else
+            new Util.UpdateServerIPTask().execute();
 
         switchMode.setText(isClient ? "Client Mode" : "Server Mode");
         switchMode.setChecked(isClient);
@@ -278,6 +285,15 @@ public class MainActivity extends AppCompatActivity {
     public void setInputChannel(String channel) {
         handler.post(() -> {
             inputChannel.setText(channel);
+        });
+    }
+
+    public void setServerIpTextView(String ip) {
+        handler.post(() -> {
+            SpoonAndroid desktop = SpoonAndroid.getInstance();
+            boolean isClient = desktop.getMode() == ConnectionMode.CLIENT;
+
+            tvServerIP.setText(isClient ? "" : ip);
         });
     }
 

@@ -571,4 +571,15 @@
             android:typeface="monospace" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tvServerIP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="loading"
+        android:textColor="@color/foreground"
+        app:layout_constraintBottom_toBottomOf="@+id/btnAction"
+        app:layout_constraintStart_toEndOf="@+id/btnAction"
+        app:layout_constraintTop_toTopOf="@+id/btnAction" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
